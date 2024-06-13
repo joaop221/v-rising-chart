@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "v-rising.fullname" . }}-test-connection"
+  labels:
+    {{- include "v-rising.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: nc1
+      image: busybox
+      command: ['nc']
+      args: ['-u {{ include "v-rising.fullname" . }} {{ .Values.service.gamePort }}']
+    - name: nc2
+      image: busybox
+      command: ['nc']
+      args: ['-u {{ include "v-rising.fullname" . }} {{ .Values.service.queryPort }}']
+  restartPolicy: Never

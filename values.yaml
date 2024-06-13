@@ -1,0 +1,87 @@
+# Default values for v-rising.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: ghcr.io/joaop221/v-rising-docker-arm64
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v0.0.16"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  fsGroup: 1001
+
+securityContext:
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1001
+
+service:
+  annotations: {}
+  type: LoadBalancer
+  gamePort: 9876
+  queryPort: 9877
+  loadBalancerIP: ""
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 6000Mi
+  requests:
+    cpu: 500m
+    memory: 6000Mi
+
+persistence:
+  enabled: false
+  existingClaim: ""
+  storageClass: ""
+  accessMode: "ReadWriteOnce"
+  size: 10Gi
+
+config:
+  TZ: America/Sao_Paulo
+  VR_NAME: V Rising Kubernetes
+  VR_DIFFICULTY_PRESET: Difficulty_Normal
+  VR_ADDRESS: ""
+  VR_MAX_USERS: "10"
+  VR_FPS: "30"
+  VR_LOWER_FPS_WHEN_EMPTY: "true"
+  VR_LOWER_FPS_WHEN_EMPTY_VALUE: "5"
+  VR_LIST_ON_EOS: "true"
+  VR_LIST_ON_STEAM: "true"
+
+secrets:
+  VR_PASSWORD: ""
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
