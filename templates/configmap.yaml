@@ -4,7 +4,9 @@ metadata:
   name: {{ include "v-rising.fullname" . }}
   labels:
     {{- include "v-rising.labels" . | nindent 4 }}
-{{- with .Values.config }}
 data:
+  VR_GAME_PORT: {{ .Values.service.gamePort | quote }}
+  VR_QUERY_PORT: {{ .Values.service.queryPort | quote }}
+  {{- with .Values.config }}
   {{- toYaml . | nindent 2 }}
-{{- end }}
+  {{- end }}
