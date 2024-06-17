@@ -63,7 +63,7 @@ resources:
     memory: 6000Mi
 
 persistence:
-  enabled: false
+  enabled: true
   existingClaim: ""
   storageClass: ""
   accessMode: "ReadWriteOnce"

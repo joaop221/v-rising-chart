@@ -74,7 +74,7 @@ spec:
         - name: v-data
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
-            {{- if .Values.persistence.existingClaim}}
+            {{- if .Values.persistence.existingClaim }}
             claimName: {{ .Values.persistence.existingClaim }}
             {{- else }}
             claimName: {{ include "v-rising.fullname" . }}
