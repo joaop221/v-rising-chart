@@ -4,11 +4,11 @@ V Rising Dedicated Server Chart to Kubernetes.
 
 ## Docker image
 
-The base image specified by this chart has your documentation here: [v-rising-docker-arm64](https://github.com/joaop221/v-rising-docker-arm64).
+The base image specified by this chart has its documentation here: [v-rising-docker-arm64](https://github.com/joaop221/v-rising-docker-arm64).
 
 ## Install
 
-The basic installation can be done by these commands:
+The basic installation can be done with these commands:
 
 ```bash
 helm repo add v-rising https://joaop221.github.io/v-rising-chart/
