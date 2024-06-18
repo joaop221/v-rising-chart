@@ -79,6 +79,9 @@ config:
   VR_LOWER_FPS_WHEN_EMPTY_VALUE: "5"
   VR_LIST_ON_EOS: "true"
   VR_LIST_ON_STEAM: "true"
+  VR_SAVE_NAME: world1
+  VR_SAVE_COUNT: "1"
+  VR_SAVE_INTERVAL: "300"
 
 secrets:
   VR_PASSWORD: ""
