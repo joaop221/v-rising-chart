@@ -64,7 +64,7 @@ spec:
           volumeMounts:
             - mountPath: /vrising/server
               name: v-server
-            - mountPath: /vrising/data/Saves/v3/{{ .Values.config.VR_SAVE_NAME }}
+            - mountPath: /vrising/data
               name: v-data
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
