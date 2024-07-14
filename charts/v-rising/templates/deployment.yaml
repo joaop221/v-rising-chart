@@ -67,12 +67,16 @@ spec:
               name: v-server
             - mountPath: /vrising/data
               name: v-data
+            {{- with .Values.configfiles.adminlist }}
             - name: v-config-files
               mountPath: /vrising/data/Settings/adminlist.txt
               subPath: adminlist.txt
+            {{- end }}
+            {{- with .Values.configfiles.banlist }}
             - name: v-config-files
               mountPath: /vrising/data/Settings/banlist.txt
               subPath: banlist.txt
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
