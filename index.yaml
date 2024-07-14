@@ -3,6 +3,16 @@ entries:
   v-rising:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2024-07-14T22:51:31.473843956Z"
+    description: A Helm chart for Kubernetes
+    digest: 8ca06ecf52ce110464addda08f284afb26d3f668d7e09b696f5968bc59aa8bf1
+    name: v-rising
+    type: application
+    urls:
+    - https://github.com/joaop221/v-rising-chart/releases/download/v-rising-0.4.0/v-rising-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2024-07-06T19:16:15.408578214Z"
     description: A Helm chart for Kubernetes
     digest: a46bd16dd978af1c01ef1581b43f88f92e75da476dcf00eb5026f66170e13e98
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://github.com/joaop221/v-rising-chart/releases/download/v-rising-0.1.0/v-rising-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-06T19:16:15.408591739Z"
+generated: "2024-07-14T22:51:31.473879623Z"
