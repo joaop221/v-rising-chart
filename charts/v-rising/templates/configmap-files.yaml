@@ -6,10 +6,10 @@ metadata:
     {{- include "v-rising.labels" . | nindent 4 }}
 data:
   adminlist.txt: |
-    {{- range .Values.configfile.adminlist }}
-      {{ . }}
+    {{- range .Values.configfiles.adminlist }}
+    {{ . }}
     {{- end }}
   banlist.txt: |
-    {{- range .Values.configfile.banlist }}
-      {{ . }}
+    {{- range .Values.configfiles.banlist }}
+    {{ . }}
     {{- end }}
