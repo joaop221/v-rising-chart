@@ -15,6 +15,7 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/configfiles: {{ include (print $.Template.BasePath "/configmap-files.yaml") . | sha256sum }}
         checksum/secrets: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
@@ -29,6 +30,33 @@ spec:
       serviceAccountName: {{ include "v-rising.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: {{ .Chart.Name }}-permissions
+          image: busybox:1.36.1
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["sh"]
+          args:
+            - -c
+            - "chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /vrising/server/VRisingServer_Data/StreamingAssets/Settings/;"
+            - "chmod -R 0777 /vrising/server/VRisingServer_Data/StreamingAssets/Settings/;"
+          volumeMounts:
+            - mountPath: /vrising/server
+              name: v-server
+            {{- with .Values.configfiles.ServerGameSettings }}
+            - name: v-config-files
+              mountPath: /vrising/server/VRisingServer_Data/StreamingAssets/Settings/ServerGameSettings.json
+              subPath: ServerGameSettings.json
+            {{- end }}
+            {{- with .Values.configfiles.adminlist }}
+            - name: v-config-files
+              mountPath: /vrising/server/VRisingServer_Data/StreamingAssets/Settings/adminlist.txt
+              subPath: adminlist.txt
+            {{- end }}
+            {{- with .Values.configfiles.banlist }}
+            - name: v-config-files
+              mountPath: /vrising/server/VRisingServer_Data/StreamingAssets/Settings/banlist.txt
+              subPath: banlist.txt
+            {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -66,6 +94,21 @@ spec:
               name: v-server
             - mountPath: /vrising/data
               name: v-data
+            {{- with .Values.configfiles.ServerGameSettings }}
+            - name: v-config-files
+              mountPath: /vrising/server/VRisingServer_Data/StreamingAssets/Settings/ServerGameSettings.json
+              subPath: ServerGameSettings.json
+            {{- end }}
+            {{- with .Values.configfiles.adminlist }}
+            - name: v-config-files
+              mountPath: /vrising/server/VRisingServer_Data/StreamingAssets/Settings/adminlist.txt
+              subPath: adminlist.txt
+            {{- end }}
+            {{- with .Values.configfiles.banlist }}
+            - name: v-config-files
+              mountPath: /vrising/server/VRisingServer_Data/StreamingAssets/Settings/banlist.txt
+              subPath: banlist.txt
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
@@ -82,6 +125,9 @@ spec:
           {{- else }}
           emptyDir: {}
           {{- end }}
+        - name: v-config-files
+          configMap:
+            name: {{ include "v-rising.fullname" . }}-files
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

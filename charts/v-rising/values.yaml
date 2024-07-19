@@ -77,6 +77,11 @@ config:
   VR_SAVE_COUNT: "1"
   VR_SAVE_INTERVAL: "300"
 
+configfiles:
+  adminlist: []
+  banlist: []
+  ServerGameSettings: ""
+
 secrets:
   VR_PASSWORD: ""
 
