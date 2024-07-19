@@ -25,16 +25,18 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext:
-  fsGroup: 1001
+podSecurityContext: {}
 
 securityContext:
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
   runAsNonRoot: true
+  runAsGroup: 1001
   runAsUser: 1001
+  seccompProfile:
+    type: RuntimeDefault
 
 service:
   annotations: {}
