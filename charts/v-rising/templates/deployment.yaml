@@ -40,35 +40,16 @@ spec:
           command: ["sh"]
           args:
             - -c
-            {{- if .Values.configfiles.ServerGameSettings }}
-            - "chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} /vrising/server/VRisingServer_Data/StreamingAssets/Settings/ServerGameSettings.json;"
-            - "chmod 0777 /vrising/server/VRisingServer_Data/StreamingAssets/Settings/ServerGameSettings.json;"
-            {{- end }}
-            {{- if .Values.configfiles.adminlist }}
-            - "chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} /vrising/server/VRisingServer_Data/StreamingAssets/Settings/adminlist.txt;"
-            - "chmod 0777 /vrising/server/VRisingServer_Data/StreamingAssets/Settings/adminlist.txt;"
-            {{- end }}
-            {{- if .Values.configfiles.banlist }}
-            - "chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} /vrising/server/VRisingServer_Data/StreamingAssets/Settings/banlist.txt;"
-            - "chmod 0777 /vrising/server/VRisingServer_Data/StreamingAssets/Settings/banlist.txt;"
-            {{- end }}
+            - mkdir -p /vrising/server/VRisingServer_Data/StreamingAssets/Settings/;
+            - cp -ra /vrising/temp/* /vrising/server/VRisingServer_Data/StreamingAssets/Settings;
+            - "chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} /vrising/server"
+            - "chmod -R 0777 /vrising/server"
           volumeMounts:
             - mountPath: /vrising/server
               name: v-server
-            {{- with .Values.configfiles.ServerGameSettings }}
+            {{- with .Values.configfiles }}
             - name: v-config-files
-              mountPath: /vrising/server/VRisingServer_Data/StreamingAssets/Settings/ServerGameSettings.json
-              subPath: ServerGameSettings.json
-            {{- end }}
-            {{- with .Values.configfiles.adminlist }}
-            - name: v-config-files
-              mountPath: /vrising/server/VRisingServer_Data/StreamingAssets/Settings/adminlist.txt
-              subPath: adminlist.txt
-            {{- end }}
-            {{- with .Values.configfiles.banlist }}
-            - name: v-config-files
-              mountPath: /vrising/server/VRisingServer_Data/StreamingAssets/Settings/banlist.txt
-              subPath: banlist.txt
+              mountPath: /vrising/temp/
             {{- end }}
       {{- end }}
       containers:
