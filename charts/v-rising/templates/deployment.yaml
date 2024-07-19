@@ -15,7 +15,6 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        checksum/configfiles: {{ include (print $.Template.BasePath "/configmap-files.yaml") . | sha256sum }}
         checksum/secrets: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
@@ -30,24 +29,6 @@ spec:
       serviceAccountName: {{ include "v-rising.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if or .Values.configfiles.ServerGameSettings .Values.configfiles.adminlist .Values.configfiles.banlist }}
-      initContainers:
-        - name: {{ .Chart.Name }}-permissions
-          image: busybox:1.36.1
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["sh"]
-          args:
-            - -c
-            - mkdir -p /vrising/server/VRisingServer_Data/StreamingAssets/Settings/;
-            - cp -ra /vrising/temp/* /vrising/server/VRisingServer_Data/StreamingAssets/Settings;
-            - "chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} /vrising/server"
-            - "chmod -R 0777 /vrising/server"
-          volumeMounts:
-            - mountPath: /vrising/server
-              name: v-server
-            - name: v-config-files
-              mountPath: /vrising/temp/
-      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -89,21 +70,27 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: v-server
-          emptyDir: {}
-        - name: v-data
-          {{- if .Values.persistence.enabled }}
+          {{- if .Values.persistence.server.enabled }}
           persistentVolumeClaim:
-            {{- if .Values.persistence.existingClaim }}
-            claimName: {{ .Values.persistence.existingClaim }}
+            {{- if .Values.persistence.server.existingClaim }}
+            claimName: {{ .Values.persistence.server.existingClaim }}
+            {{- else }}
+            claimName: {{ include "v-rising.fullname" . }}-server
+            {{- end }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+        - name: v-data
+          {{- if .Values.persistence.data.enabled }}
+          persistentVolumeClaim:
+            {{- if .Values.persistence.data.existingClaim }}
+            claimName: {{ .Values.persistence.data.existingClaim }}
             {{- else }}
             claimName: {{ include "v-rising.fullname" . }}
             {{- end }}
           {{- else }}
           emptyDir: {}
           {{- end }}
-        - name: v-config-files
-          configMap:
-            name: {{ include "v-rising.fullname" . }}-files
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
