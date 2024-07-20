@@ -15,9 +15,13 @@ This Helm chart provides default values for deploying the v-rising application. 
 | `serviceAccount.annotations`       | Annotations to add to the service account (empty in this case).                                | `{}` (empty object)             |
 | `serviceAccount.name`              | Name of the service account (empty in this case, auto-generated).                              | `""` (empty string)             |
 | `podAnnotations`                   | Annotations to add to the pods (empty in this case).                                           | `{}` (empty object)             |
-| `podSecurityContext.fsGroup`       | Group ID for the pod security context.                                                         | `1001`                          |
-| `securityContext.runAsNonRoot`     | Whether to run the container as a non-root user.                                               | `true`                          |
-| `securityContext.runAsUser`        | User ID for the container security context.                                                    | `1001`                          |
+| `podSecurityContext`               | Pod security context.                                                                          | `{}` (empty object)             |
+| `securityContext.allowPrivilegeEscalation` | Whether to allow privilege escalation for pods.                                        | `false`                         |
+| `securityContext.capabilities.drop` | Capabilities to drop for the container.                                                       | `ALL`                           |
+| `securityContext.runAsNonRoot`    | Whether to run the container as a non-root user.                                                | `true`                          |
+| `securityContext.runAsGroup`      | Group ID for the container security context.                                                    | `1001`                          |
+| `securityContext.runAsUser`       | User ID for the container security context.                                                     | `1001`                          |
+| `securityContext.seccompProfile.type` | Seccomp profile type for the container.                                                     | `RuntimeDefault`                |
 | `service.annotations`              | Annotations for the Kubernetes service (empty in this case).                                   | `{}` (empty object)             |
 | `service.type`                     | Type of Kubernetes service for v-rising.                                                       | `ClusterIP`                     |
 | `service.gamePort`                 | Port for the game service.                                                                     | `9876`                          |

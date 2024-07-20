@@ -59,18 +59,11 @@ ingressRoute:
 resources: {}
 
 persistence:
-  data:
-    enabled: true
-    existingClaim: ""
-    storageClass: ""
-    accessMode: "ReadWriteOnce"
-    size: 10Gi
-  server:
-    enabled: false
-    existingClaim: ""
-    storageClass: ""
-    accessMode: "ReadWriteOnce"
-    size: 10Gi
+  enabled: true
+  existingClaim: ""
+  storageClass: ""
+  accessMode: "ReadWriteOnce"
+  size: 10Gi
 
 config:
   TZ: America/Sao_Paulo

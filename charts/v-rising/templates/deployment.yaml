@@ -70,21 +70,12 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: v-server
-          {{- if .Values.persistence.server.enabled }}
-          persistentVolumeClaim:
-            {{- if .Values.persistence.server.existingClaim }}
-            claimName: {{ .Values.persistence.server.existingClaim }}
-            {{- else }}
-            claimName: {{ include "v-rising.fullname" . }}-server
-            {{- end }}
-          {{- else }}
           emptyDir: {}
-          {{- end }}
         - name: v-data
-          {{- if .Values.persistence.data.enabled }}
+          {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
-            {{- if .Values.persistence.data.existingClaim }}
-            claimName: {{ .Values.persistence.data.existingClaim }}
+            {{- if .Values.persistence.existingClaim }}
+            claimName: {{ .Values.persistence.existingClaim }}
             {{- else }}
             claimName: {{ include "v-rising.fullname" . }}
             {{- end }}
