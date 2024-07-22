@@ -37,8 +37,6 @@ This Helm chart provides default values for deploying the v-rising application. 
 | `persistence.size`                 | Size of the persistent volume.                                                                 | `10Gi`                          |
 | `config.TZ`                        | Timezone for the v-rising application.                                                         | `America/Sao_Paulo`             |
 | `config.VR_NAME`                   | Name of the v-rising server.                                                                   | `V Rising Kubernetes`           |
-| `config.VR_DIFFICULTY_PRESET`      | Difficulty preset for the game.                                                                | `Difficulty_Normal`             |
-| `config.VR_MAX_USERS`              | Maximum number of users allowed.                                                               | `10`                            |
 | `config.VR_FPS`                    | Frames per second for the game.                                                                | `30`                            |
 | `config.VR_LOWER_FPS_WHEN_EMPTY`   | Whether to lower FPS when the server is empty.                                                 | `true`                          |
 | `config.VR_LOWER_FPS_WHEN_EMPTY_VALUE` | FPS value when the server is empty.                                                        | `5`                             |

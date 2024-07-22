@@ -68,8 +68,6 @@ persistence:
 config:
   TZ: America/Sao_Paulo
   VR_NAME: V Rising Kubernetes
-  VR_DIFFICULTY_PRESET: Difficulty_Normal
-  VR_MAX_USERS: "10"
   VR_FPS: "30"
   VR_LOWER_FPS_WHEN_EMPTY: "true"
   VR_LOWER_FPS_WHEN_EMPTY_VALUE: "5"
