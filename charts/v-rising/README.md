@@ -7,7 +7,7 @@ This Helm chart provides default values for deploying the v-rising application. 
 | `replicaCount`                     | Number of replicas for the v-rising deployment.                                                | `1`                             |
 | `image.repository`                 | Docker image repository for v-rising.                                                          | `ghcr.io/joaop221/v-rising-docker-arm64` |
 | `image.pullPolicy`                 | Image pull policy for the v-rising container.                                                  | `IfNotPresent`                  |
-| `image.tag`                        | Tag of the v-rising Docker image.                                                              | `v0.0.16`                       |
+| `image.tag`                        | Tag of the v-rising Docker image.                                                              | `v0.0.17`                       |
 | `imagePullSecrets`                 | List of image pull secrets (empty in this case).                                               | `[]` (empty list)               |
 | `nameOverride`                     | Override for the release name (empty in this case).                                            | `""` (empty string)             |
 | `fullnameOverride`                 | Override for the full release name (empty in this case).                                       | `""` (empty string)             |
@@ -38,13 +38,14 @@ This Helm chart provides default values for deploying the v-rising application. 
 | `config.TZ`                        | Timezone for the v-rising application.                                                         | `America/Sao_Paulo`             |
 | `config.VR_NAME`                   | Name of the v-rising server.                                                                   | `V Rising Kubernetes`           |
 | `config.VR_FPS`                    | Frames per second for the game.                                                                | `30`                            |
+| `config.VR_MAX_USERS`              | Max Allowed User.                                                                              | `10`                            |
 | `config.VR_LOWER_FPS_WHEN_EMPTY`   | Whether to lower FPS when the server is empty.                                                 | `true`                          |
 | `config.VR_LOWER_FPS_WHEN_EMPTY_VALUE` | FPS value when the server is empty.                                                        | `5`                             |
 | `config.VR_LIST_ON_EOS`            | Whether to list the server on EOS.                                                             | `true`                          |
 | `config.VR_LIST_ON_STEAM`          | Whether to list the server on Steam.                                                           | `true`                          |
 | `config.VR_SAVE_NAME`              | Name for the saved game                                                                        | `world1`                        |
-| `config.VR_SAVE_COUNT`             | Number of saved game slots.                                                                    | `1`                             |
-| `config.VR_SAVE_INTERVAL`          | Interval (in seconds) for saving the game.                                                     | `300`                           |
+| `config.VR_SAVE_COUNT`             | Number of saved game slots.                                                                    | `3`                             |
+| `config.VR_SAVE_INTERVAL`          | Interval (in seconds) for saving the game.                                                     | `120`                           |
 | `secrets.VR_PASSWORD`              | Secret password for the v-rising server (empty in this case).                                  | `""` (empty string)             |
 | `autoscaling.enabled`              | Whether to enable autoscaling.                                                                 | `false`                         |
 | `autoscaling.minReplicas`          | Minimum number of replicas for autoscaling.                                                    | `1`                             |

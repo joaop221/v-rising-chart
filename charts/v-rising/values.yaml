@@ -8,7 +8,7 @@ image:
   repository: ghcr.io/joaop221/v-rising-docker-arm64
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.0.16"
+  tag: "v0.0.17"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -69,13 +69,14 @@ config:
   TZ: America/Sao_Paulo
   VR_NAME: V Rising Kubernetes
   VR_FPS: "30"
+  VR_MAX_USERS: "10"
   VR_LOWER_FPS_WHEN_EMPTY: "true"
   VR_LOWER_FPS_WHEN_EMPTY_VALUE: "5"
   VR_LIST_ON_EOS: "true"
   VR_LIST_ON_STEAM: "true"
   VR_SAVE_NAME: world1
-  VR_SAVE_COUNT: "1"
-  VR_SAVE_INTERVAL: "300"
+  VR_SAVE_COUNT: "3"
+  VR_SAVE_INTERVAL: "120"
 
 secrets:
   VR_PASSWORD: ""
