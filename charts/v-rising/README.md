@@ -11,6 +11,7 @@ This Helm chart provides default values for deploying the v-rising application. 
 | `imagePullSecrets`                 | List of image pull secrets (empty in this case).                                               | `[]` (empty list)               |
 | `nameOverride`                     | Override for the release name (empty in this case).                                            | `""` (empty string)             |
 | `fullnameOverride`                 | Override for the full release name (empty in this case).                                       | `""` (empty string)             |
+| `deploymentStrategy`               | Kubernetes Deployment strategy .                                                               | `"RollingUpdate"`               |
 | `serviceAccount.create`            | Whether to create a service account.                                                           | `true`                          |
 | `serviceAccount.annotations`       | Annotations to add to the service account (empty in this case).                                | `{}` (empty object)             |
 | `serviceAccount.name`              | Name of the service account (empty in this case, auto-generated).                              | `""` (empty string)             |

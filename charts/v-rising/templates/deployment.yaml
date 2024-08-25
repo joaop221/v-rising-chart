@@ -11,6 +11,8 @@ spec:
   selector:
     matchLabels:
       {{- include "v-rising.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: {{ .Values.deploymentStrategy }}
   template:
     metadata:
       annotations:
