@@ -36,6 +36,7 @@ This Helm chart provides default values for deploying the v-rising application. 
 | `persistence.storageClass`         | Storage class for persistent volume provisioning (empty in this case).                         | `""` (empty string)             |
 | `persistence.accessMode`           | Access mode for the persistent volume.                                                         | `ReadWriteOnce`                 |
 | `persistence.size`                 | Size of the persistent volume.                                                                 | `10Gi`                          |
+| `persistence.existentVolumeName`   | Specify existent PV name.                                                                      | `""` (empty string)             |
 | `config.TZ`                        | Timezone for the v-rising application.                                                         | `America/Sao_Paulo`             |
 | `config.VR_NAME`                   | Name of the v-rising server.                                                                   | `V Rising Kubernetes`           |
 | `config.VR_FPS`                    | Frames per second for the game.                                                                | `30`                            |

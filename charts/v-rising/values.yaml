@@ -65,6 +65,7 @@ persistence:
   storageClass: ""
   accessMode: "ReadWriteOnce"
   size: 10Gi
+  existentVolumeName: ""
 
 config:
   TZ: America/Sao_Paulo
