@@ -7,7 +7,7 @@ This Helm chart provides default values for deploying the v-rising application. 
 | `replicaCount`                     | Number of replicas for the v-rising deployment.                                                | `1`                             |
 | `image.repository`                 | Docker image repository for v-rising.                                                          | `ghcr.io/joaop221/v-rising-docker-arm64` |
 | `image.pullPolicy`                 | Image pull policy for the v-rising container.                                                  | `IfNotPresent`                  |
-| `image.tag`                        | Tag of the v-rising Docker image.                                                              | `v0.0.18`                       |
+| `image.tag`                        | Tag of the v-rising Docker image.                                                              | `v0.0.19`                       |
 | `imagePullSecrets`                 | List of image pull secrets (empty in this case).                                               | `[]` (empty list)               |
 | `nameOverride`                     | Override for the release name (empty in this case).                                            | `""` (empty string)             |
 | `fullnameOverride`                 | Override for the full release name (empty in this case).                                       | `""` (empty string)             |
